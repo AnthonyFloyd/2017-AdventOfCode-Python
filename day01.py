@@ -45,7 +45,6 @@ def calculateCaptcha(integerString, offset=1):
 
     # Calculate the CAPTCHA
     runningTotal = 0
-    lastInteger = -1
 
     for (counter, integer) in enumerate(integerList):
         if counter == initialLength:
@@ -53,8 +52,6 @@ def calculateCaptcha(integerString, offset=1):
 
         if integer == integerList[counter + offset]:
             runningTotal += integer
-
-        lastInteger = integer
 
     return runningTotal
 
