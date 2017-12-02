@@ -47,8 +47,15 @@ def calculateCaptcha(integerString, offset=1):
     runningTotal = 0
 
     for (counter, integer) in enumerate(integerList):
+
+        # We only need to step through the original list, not its copy
+        # so bail out of the loop when we hit the end of the first list
+
         if counter == initialLength:
             break
+
+        # Otherwise, look at the matching integer, see if it matches, and
+        # add it to the total if it does
 
         if integer == integerList[counter + offset]:
             runningTotal += integer
