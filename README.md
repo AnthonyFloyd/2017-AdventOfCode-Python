@@ -1,6 +1,6 @@
 # 2017 Advent of Code Solutions in Python
 
-[Convergent](http://www.convergent.ca) is using this year's *Advent of Code* as a professional development exercise. 
+[Convergent](http://www.convergent.ca) is using this year's [*Advent of Code*](http://adventofcode.com/2017) as a professional development exercise. 
 
 There are 4 mandatory exercises that all developers must complete and submit for review. The solutions will be reviewed in group meetings and will be evaluated for style and structure. All mandatory exercises must be completed in Python.
 
