@@ -21,7 +21,9 @@ PART2_TESTS = [(2, 4),
                (5, 10),
                (10, 11),
                (11, 23),
-               (59, 122)]
+               (59, 122),
+               (747, 806),
+               (800, 806)]
 
 PART2_TARGET = PART1_END
 
@@ -117,7 +119,7 @@ def getLastFullRing(squareID):
         size += 2
         totalSquares += 4 * (size - 1)
 
-        if squareID >= totalSquares and squareID < totalSquares + 4 * (size + 1):
+        if squareID > totalSquares  and squareID <= totalSquares + 4 * (size + 1):
             # found the right ring size
             break
 
@@ -155,10 +157,10 @@ def findNextAccumulation(target):
 
     matrixSize = getLastFullRing(target)[0] + 4
 
-    spiralMatrix = numpy.zeros((matrixSize, matrixSize))
+    spiralMatrix = numpy.zeros((matrixSize, matrixSize), dtype=int)
 
     # populate the spiral until we exceed the target
-    x1 = matrixSize // 2
+    x1 = (matrixSize - 1) // 2
     y1 = x1
 
     location = [x1, y1] # (0, 0)
@@ -174,13 +176,19 @@ def findNextAccumulation(target):
         # do we need to move to the next ring?
 
         (size, totalSquares) = getLastFullRing(currentSquareID)
-        distanceFromRingStart = currentSquareID - totalSquares - 1
+        currentRingStartID =  size ** 2 + 1
+        distanceFromRingStart = currentSquareID - currentRingStartID
 
+        print('Square {:d} is {:d} from the start of the ring'.format(currentSquareID, distanceFromRingStart))
         size += 2
 
         if distanceFromRingStart == 0:
-            # start a new ring, move right one
+            # start a new ring, move right one, down one
+            print("Starting new ring")
+            print("Old location: {:d}, {:d}".format(location[0] - x1, location[1] - y1))
             location = [location[0] + 1, location[1]]
+            #print("New location: {:d}, {:d}".format(location[0] - x1, location[1] - y1))
+
         else:
             if distanceFromRingStart <= (size - 2):
                 # go up one
@@ -197,6 +205,7 @@ def findNextAccumulation(target):
 
         # find the value to put in the new spot
         # find sum of all neighbours
+        print("New location: {:d}, {:d}".format(location[0] - x1, location[1] - y1))
         x = location[0]
         y = location[1]
 
@@ -207,6 +216,12 @@ def findNextAccumulation(target):
         spiralMatrix[x, y] = total
 
     # only get here if we found a value bigger than the target!
+
+    print("Location: {:d},{:d}".format(x, y))
+    print("{:6d} {:6d} {:6d}".format(spiralMatrix[x-1][y+1], spiralMatrix[x][y+1], spiralMatrix[x+1][y+1]))
+    print("{:6d} {:6d} {:6d}".format(spiralMatrix[x-1][y], spiralMatrix[x][y], spiralMatrix[x+1][y]))
+    print("{:6d} {:6d} {:6d}".format(spiralMatrix[x-1][y-1], spiralMatrix[x][y-1], spiralMatrix[x+1][y-1]))
+
     return total
 
 # Unit tests
