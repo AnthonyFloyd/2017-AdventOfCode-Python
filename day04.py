@@ -22,8 +22,6 @@ PART2_TESTS = [('abcde fghij', True),
 
 PART2_LINES = PART1_LINES
 
-DEBUG = False
-
 # Solution
 
 def evaluatePassPhrase1(passPhrase):
@@ -34,8 +32,6 @@ def evaluatePassPhrase1(passPhrase):
     Input is a string of space-separated words. Output is boolean.
 
     '''
-
-    global DEBUG
 
     # Keep a list of all the words in the passphrase
     words = []
@@ -111,8 +107,6 @@ def evaluatePassPhrase2(passPhrase):
 
     '''
 
-    global DEBUG
-
     # Split out the words from the phrase
     words = [Word(word) for word in passPhrase.split()]
 
@@ -134,8 +128,6 @@ class TestPassPhrase(unittest.TestCase):
 
     '''
 
-    global DEBUG
-
     # Part 1
 
     def test_part1(self):
@@ -143,9 +135,6 @@ class TestPassPhrase(unittest.TestCase):
         Part 1 tests
 
         '''
-        global DEBUG
-
-        DEBUG = True
 
         for (passPhrase, validity) in PART1_TESTS:
             self.assertEqual(evaluatePassPhrase1(passPhrase), validity)
@@ -155,9 +144,6 @@ class TestPassPhrase(unittest.TestCase):
         Part 2 tests
 
         '''
-        global DEBUG
-
-        DEBUG = True
 
         for (passPhrase, validity) in PART2_TESTS:
             self.assertEqual(evaluatePassPhrase2(passPhrase), validity)
