@@ -12,6 +12,8 @@ DAY10_SIZE = 256
 
 def computeHash(ringInputString, ringSize):
 
+
+
     ringInputList = [int(i) for i in ringInputString.split(',')]
     ringContents = [i for i in range(ringSize)]
 
@@ -68,9 +70,8 @@ def computeKnot(ringInputString, ringSize):
             else:
                 ringContents = doubleContents[:ringSize]
 
-            cursorPosition = cursorPosition + length + skipSize
-            if cursorPosition > ringSize:
-                cursorPosition -= ringSize
+            cursorPosition += length + skipSize
+            cursorPosition = cursorPosition % ringSize
 
             skipSize += 1
 
