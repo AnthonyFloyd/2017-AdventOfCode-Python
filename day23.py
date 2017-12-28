@@ -43,6 +43,16 @@ def processInstructions(instructionList, processor):
 
         jump = 1
 
+        #print("L{0:d} '{1}' a:{2:d} b:{3:d} c:{4:d} d:{5:d} e:{6:d} f:{7:d} g:{8:d} h:{9:d}".format(position+1, instructionLine.strip(),
+                                                                                                    #processor.get('a'),
+                                                                                                    #processor.get('b'),
+                                                                                                    #processor.get('c'),
+                                                                                                    #processor.get('d'),
+                                                                                                    #processor.get('e'),
+                                                                                                    #processor.get('f'),
+                                                                                                    #processor.get('g'),
+                                                                                                    #processor.get('h'),))
+
         if instruction == 'set':
             processor.set(register, value)
         elif instruction == 'sub':
