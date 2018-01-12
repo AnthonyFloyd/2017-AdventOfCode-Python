@@ -124,7 +124,6 @@ class Disk(object):
 
         # Use a cursor concept to move through the grid
 
-        cursorLocation = [0,0]
         self.__nRegions = 0
 
         for rowCounter in range(self.diskSize):
@@ -140,7 +139,7 @@ class Disk(object):
                     self.__nRegions += 1
                     uncheckedRegionLocations = [(rowCounter,colCounter),]
 
-                    while len(uncheckedRegionLocations) > 0:
+                    while uncheckedRegionLocations:
                         # take one down, pass it around
                         (y, x) = uncheckedRegionLocations.pop(0)
                         self.regionMap[y, x] = self.__nRegions
@@ -166,7 +165,13 @@ class Disk(object):
         return self.__nRegions
 
 if __name__ == '__main__':
+    import time
+
+    startTime = time.clock()
+
     disk = Disk(DAY14_INPUT)
+
+    endTime = time.clock()
 
     print("Advent of Code Day 14")
     # Part 1, block counting
@@ -176,7 +181,7 @@ if __name__ == '__main__':
     #
     # Note that usedBlocks is calculated when the disk is created above
     #
-    print("{0:d} blocks are used.".format(disk.nUsedBlocks))
+    print("{0:d} blocks are used. (Took {1:.3f} seconds to run)".format(disk.nUsedBlocks, endTime - startTime))
 
     # Part 2, region counting
     # With the disk map, find all regions consisting of adjacent used blocks
@@ -185,4 +190,8 @@ if __name__ == '__main__':
     # In this case, nRegions is a LongRunningTask and is a lazy calculation
     # and is only calculated when it's needed (below)
     #
-    print("The disk contains {0:d} regions.".format(disk.nRegions))
+    startTime = time.clock()
+    nRegions = disk.nRegions
+    endTime = time.clock()
+
+    print("The disk contains {0:d} regions. (Took {1:.3f} seconds to run)".format(disk.nRegions, endTime - startTime))
